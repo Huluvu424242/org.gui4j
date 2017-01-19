@@ -17,6 +17,6 @@ velocity.log*
 .settings/
 .idea/
 target/
-//.project
-//.classpath
+.project
+.classpath
 
