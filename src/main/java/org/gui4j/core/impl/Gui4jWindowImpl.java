@@ -54,7 +54,7 @@ abstract class Gui4jWindowImpl extends Gui4jSwingContainer implements ErrorTags,
     private boolean maximize = false;
     private boolean maximizeSize = false; // Maximimiert, aber mit Obergrenze
     private boolean setSize = false;
-    // falls gesetzt, dann wird die Größe des Fenster auf (height, width)
+    // falls gesetzt, dann wird die Gre des Fenster auf (height, width)
     // gesetzt
     private int maximizeMaxHeight;
     private int maximizeMaxWidth;
