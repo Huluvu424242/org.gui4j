@@ -1,0 +1,17 @@
+Todo:
+=====
+
+-event aware - Eigenschaft konsistent in der Doku nachziehen
+
+-Erlaubte Parameter in Method calls konsequent dokumentieren.
+
+-wozu dient Attribut componentType bei external? Könnte das nicht hartkodiert auf Component stehen?
+
+-Doku von Attributen gui4jId und style (nur bei Toplevel ELementen, werden für die DTD Erzeugung hartkodiert hinzugefügt).
+
+- Einheitliche Definition der erlaubten Parameter (?value, ...) für Typcheck und zur Doku-
+  Generierung verwenden.
+
+
+
+

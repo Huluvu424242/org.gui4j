@@ -1,0 +1,135 @@
+<document>
+    <properties>
+        <title>gui4j Release Notes</title>
+    </properties>
+    <body>
+		<!-- Release 1.3 -->
+		<release date="2007-04-26" version="1.3">
+			<action type="fix" dev="joachims">
+				Fixed a bug with an editable combobox inside a table. 
+			</action>
+			<action type="update" dev="joachims">
+				When refreshing the a table the table rendered are cleared. This implies that attributes like background or foreground
+				are reevaluated when refreshing the table content. 
+			</action>
+		</release>
+		<!-- Release 1.2.4 -->
+		<release date="2006-04-26" version="1.2.4">
+			<action type="update" dev="marcusa">
+				Tooltip is now set for all renderer types in a matrix cell. 
+			</action>
+		</release>
+        <!-- Release 1.2.3 -->
+        <release version="1.2.3" date="2005-11-16">        
+            <action dev="joachims" type="add">
+                Added attributes "name" and "title" for top level XML element "View".
+            </action>
+            <action dev="joachims" type="add">
+                Added Gui4j.createDialog() methods that allow to create dialogs with
+                a normal java.awt.Frame or java.awt.Dialog as a parent.
+            </action>
+            <action dev="kayk" type="add">
+                Added attribute "hAlignment" to component "hbox" and attribute "vAlignment"
+                to component "vbox".
+            </action>
+            <action dev="kayk" type="add">
+                Added attribute "maxCharacters" to subelement "matrixCol" of component "matrix".
+            </action>
+            <action dev="joachims" type="fix">
+                Fixed a subtle bug in Gui4j thread handling.
+            </action>
+        </release>
+        <!-- Release 1.2.2 -->
+        <release version="1.2.2" date="2005-10-24">
+            <action dev="joachims" type="add">
+                Added possibility to define custom way of retrieving the XML definitions.
+                File resources are still the default but it is possible to create a custom mechanism,
+                e.g. InputStreams from sockets etc. Have a look at the new class Gui4jResourceProvider.
+            </action>
+            <action dev="joachims" type="add">
+                Added support for popup menus in "matrix" component. Added attribute "popupContext" for
+                subcomponent "matrixCell".
+            </action>
+            <action dev="kayk" type="update">
+                Changed the behaviour of "matrix" component in such a way that a programmatic change of cell
+                selection (via attribute "cellSelectionPair") causes only a single call to the method defined
+                for attribute "onCellSelect" of subcomponent "matrixCell". Previously, two separate method calls
+                were issued, one for the row change and one for the column change.
+            </action>
+            <action dev="kayk" type="fix"> Fixed a bug when using JDK 1.5 that prevented comboBox components to display 
+                horizontal scrollbars in their popup when necessary.</action>
+            <action dev="kayk" type="fix">
+                Fixed a bug introduced in release 1.2.1 where the current thread did not block
+                when displaying a dialog with Gui4jDialog.show().
+            </action>
+            <action dev="kayk" type="fix"> Fixed a bug where it could happen that the actionCommand of an 
+                edit-component was not executed when the user pressed ENTER.
+            </action>
+            <action dev="kayk" type="fix"> Fixed a bug that caused the tree specific popup menu command 
+                "expandall" (see component treePopupMenuItem) to work unreliably.</action>
+        </release>
+        <!-- Release 1.2.1 -->
+        <release version="1.2.1" date="2005-09-05">
+            <action dev="kayk" type="add">
+                Added attribute "manualActionOnly" to component "comboBox".
+            </action>
+            <action dev="kayk" type="fix">
+                Fixed a bug that prevented non-JDK-LookAndFeels from installing their own ComboBox UI.
+            </action>
+            <action dev="kayk" type="update">Moved all examples to org.gui4j.examples. Added example "Expense Records" 
+                which is also described in the gui4j reference documentation. </action>
+        </release>
+        <!-- Release 1.2 -->
+		<release version="1.2" date="2005-08-05">
+			<action dev="kayk" type="add"> Added component "toolbar". </action>
+			<action dev="kayk" type="add"> Added component 
+				"simpleInternalFrame". </action>
+			<action dev="kayk" type="add"> Added component "toggleButton". 
+				</action>
+			<action dev="kayk" type="add"> Added attribute "resizeWeight" to 
+				component "splitPane".</action>
+			<action dev="kayk" type="add"> Added attribute "showDivider" to 
+				component "splitPane".</action>
+			<action dev="kayk" type="add"> Added attribute "listIndicator" to 
+				subelement "tableColumn" of component "table".</action>
+			<action dev="kayk" type="add"> Added attribute "embedded" to 
+				component "tabbedPane".</action>
+			<action dev="marcusa" type="update"> Added possibility to use 
+				parameters in method calls for attributes "background" and 
+				"foreground" of subelements "matrixRow", "matrixColumn" and 
+				"matrixCell" of component "matrix". Allows dynamic colouring of 
+				matrix cells dependent on its contents.</action>
+			<action dev="kayk" type="update"> Made "onSelect" for component 
+				checkBox deprecated. All button components now consistently 
+				provide "actionCommand" with parameter.</action>
+			<action dev="kayk" type="update"> Made attribute "text" of 
+				component "button" optional instead of required.</action>
+			<action dev="kayk" type="fix"> Changed default behaviour of 
+				components to show non-mouse-triggered popup events.</action>
+			<action dev="kayk" type="update" due-to="Marcus Adlwart"> Defined 
+				location of non-mouse-triggered popup-menus for table, 
+				cellTable and matrix to be the center of the selected 
+				cell.</action>
+			<action dev="kayk" type="fix" due-to="Marcus Adlwart"> Minor 
+				corrections in reference documentation.</action>
+			<action dev="kayk" type="update"> Changed thread priority of worker 
+				threads to be Thread.NORM_PRIORITY instead of AWT thread's 
+				higher priority. Applications should appear slightly more 
+				responsive since the AWT thread is not competing with worker 
+				threads any more.</action>
+			<action dev="marcusa" type="add"> Added attribute "hTextPosition" 
+				to components "label", "button", "checkBox", "checkBoxMenuItem", 
+				"radioButtonMenuItem", "popupMenuItem" "toggleButton", 
+				"radioButton" and "calendarButton"</action>
+			<action dev="marcusa" type="add"> Added attribute "vTextPosition" 
+				to components "label", "button", "checkBox", "checkBoxMenuItem", 
+				"radioButtonMenuItem", "popupMenuItem" "toggleButton", 
+				"radioButton" and "calendarButton"</action>
+		</release>
+        <!-- -->
+        <!-- Release 1.1 -->
+        <release version="1.1" date="2005-06-06">
+            <action dev="kayk" type="add"> Initial open-source version of gui4j. </action>
+        </release>
+    </body>
+</document>

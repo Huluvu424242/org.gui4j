@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE View SYSTEM "view.dtd">
+<View top="main">
+    <!-- -->
+    <!-- Includes -->
+    <Include url="styles.xml" alias="styles"/>
+    <!-- -->
+    <!-- Main layout: form, validation message and buttons -->
+    <borderLayout guiId="main" border="res.borderForm">
+        <placeBl anchor="center" id="form"/>
+        <placeBl anchor="south">
+            <borderLayout vSpacing="5">
+                <placeBl anchor="north" id="validation"/>
+                <placeBl anchor="south">
+                    <borderLayout>
+                        <placeBl anchor="east" id="buttons"/>
+                    </borderLayout>
+                </placeBl>
+            </borderLayout>
+        </placeBl>
+    </borderLayout>
+    <!-- -->
+    <!-- Form -->
+    <StyleBegin name="editForm"/>
+    <labelForm guiId="form">
+        <labels>
+            <label text="'Record Id'" />
+            <label text="'Date'" />
+            <label text="'Expense Type'"/>
+            <label text="'Amount'" />
+        </labels>
+        <components>
+            <edit value="getRecord.getRecordId" setValue="getRecord.setRecordId(?value)"/>
+            <edit value="conv.day2str(getRecord.getDay)" setValue="getRecord.setDay(conv.str2Day(?value))"/>
+            <comboBox contentType="ExpenseType" content="getExpenseTypes" value="?item.getText" 
+                selectedItem="getRecord.getExpenseType" onSelect="getRecord.setExpenseType(?item)"/>
+            <edit value="conv.int2str(getRecord.getAmount)" setValue="getRecord.setAmount(conv.str2int(?value))"/>
+        </components>
+    </labelForm>
+    <StyleEnd/>
+    <!-- -->
+    <!-- Validation Message -->
+    <label guiId="validation" text="{eValidationChanged}getValidationMessage" icon="res.iconError" 
+        visible="{eValidationChanged}showValidation" hAlignment="right" hTextPosition="leading"/>
+    <!-- -->
+    <!-- Buttons -->
+    <gridLayout guiId="buttons" cols="2" rows="1" hSpacing="3">
+        <placeGl row="0" col="0">
+            <button text="'Ok'" actionCommand="actionSave"/>
+        </placeGl>
+        <placeGl row="0" col="1">
+            <button text="'Cancel'" actionCommand="actionCancel"/>
+        </placeGl>
+    </gridLayout>
+</View>

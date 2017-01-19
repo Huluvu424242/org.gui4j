@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Styles
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Styles</h1>
+		Gui4j supports the style concept to simplify the description of graphical user interfaces with the same
+		look and feel. For instance, all editable number fields, should be displayed with white background, blue
+		text color and right alignment:<br/><br/>
+		<tt>
+			&lt;edit value=&quot;getValue&quot; setValue=&quot;setValue(?value)&quot; alignment=&quot;right&quot;<br/>
+			&nbsp;&nbsp;background=&quot;:Color.WHITE&quot; foreground=&quot;:Color.BLUE&quot;/&gt;
+		</tt><br/><br/>
+		For this look and feel we need three attribute values and for all edit components we have to repeat this 
+		information. This is redundant information and much effort to change when the text color should now be black, for instance.<p/>
+		The style concept allows to group attribute values in a style and gui4j components simply refer to that style name:<br/><br/>
+		<tt>
+			&lt;Style name=&quot;editNumber&quot;&gt;<br/>
+			&nbsp;&nbsp;&lt;Style_edit alignment=&quot;right&quot; background=&quot;:Color.WHITE&quot; foreground=&quot;:Color.BLUE&quot;/&gt;<br/>
+			&lt;/Style&gt;<br/><br/>
+			...<br/><br/>
+			&lt;edit value=&quot;getValue&quot; setValue=&quot;setValue(?value)&quot; style=&quot;editNumber&quot;/&gt;
+		</tt><br/><br/>
+		The outer element <tt>Style</tt> introduces a new style name. For each supported guij4 component there is an additional
+		tag <tt>Style_tagName</tt> to define the corresponding style attributes. These tags are used inside the <tt>Style</tt>
+		element. In other elements a style is referenced using the <tt>style</tt> Attribut. The style reference only adds not already
+		defined attributes. For instance, if the background color is defined in the style and in the element referencing the style, then
+		the attribute value of the element referencing the style is used, since this has priorty.
+		<h3>Style Blocks</h3>
+		All definitions inside <tt>&lt;StyleBegin name=&quot;styleName&quot;/&gt</tt> and <tt>&lt;StyleEnd/&gt;</tt> uses implicitly the
+		style <i>styleName</i> if the <tt>style</tt> attribut is not defined.
+		<h3>Default Style</h3>
+		If an element is not inside a style block and the <tt>style</tt> attribut is not specified, then this element implicitly
+		uses a style with name <tt>Default</tt>. The application is free to define this style.
+		<h3>Style inheritance</h3>
+		It is possible to define a new style based on an already existing one. In this case, the new definitions overwrite and extend the
+		exisiting:<br/><br/>
+		<tt>
+			&lt;Style name=&quot;editNumber&quot; extends=&quot;Default&quot;&gt;<br/>
+			&nbsp;&nbsp;&lt;Style_edit alignment=&quot;right&quot; background=&quot;:Color.WHITE&quot; foreground=&quot;:Color.BLUE&quot;/&gt;<br/>
+			&lt;/Style&gt;<br/><br/>
+			...<br/><br/>
+			&lt;edit value=&quot;getValue&quot; setValue=&quot;setValue(?value)&quot; style=&quot;editNumber&quot;/&gt;
+		</tt><br/><br/>
+	</body>	
+</html>

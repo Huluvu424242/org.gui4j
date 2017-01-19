@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Include
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Including other XML files</h1>
+		To avoid large gui descriptions, gui4j supports a mechanism to include other xml files. For each inclusion, an alias must be defined
+		which is the prefix for all identifiers defined in the included file. Hence, gui4j builds hierarchical names when including other files.<p/>
+		
+		Content of file <tt>basic.xml</tt><br/><br/>
+		<tt>
+		    &lt?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;<br>
+			&lt;!DOCTYPE <a href="Gui4jView.html">View</a> SYSTEM &quot;<a href="view.dtd">view.dtd</a>&quot;&gt;<br>
+				&nbsp;&nbsp;&lt;<a href="Gui4jView.html">View</a>&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="edit.html">edit</a> guiId=&quot;myedit&quot; value=&quot;getValue&quot; setValue=&quot;setValue(?value)&quot;/&gt;<br>
+				&nbsp;&nbsp;&lt;/<a href="Gui4jView.html">View</a>&gt;<br></br>
+		</tt><p/>
+
+		Content of file <tt>main.xml</tt><br/><br/>
+		<tt>
+		    &lt?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;<br>
+			&lt;!DOCTYPE <a href="Gui4jView.html">View</a> SYSTEM &quot;<a href="view.dtd">view.dtd</a>&quot;&gt;<br>
+				&nbsp;&nbsp;&lt;<a href="Gui4jView.html">View</a>&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>Include</b> url=&quot;basic.xml&quot; <b>alias</b>=&quot;incA&quot;/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>Include</b> url=&quot;basic.xml&quot; <b>alias</b>=&quot;incB&quot;/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="tableLayout.html">tableLayout</a> guiId=&quot;myedits&quot; rows=&quot;p&quot; cols=&quot;p,p&quot;&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="placeTl.html">placeTl</a> row=&quot;0&quot; col=&quot;0&quot; id=&quot;incA/myedit&quot;/&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="placeTl.html">placeTl</a> row=&quot;0&quot; col=&quot;1&quot; id=&quot;incB/myedit&quot;/&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<a href="tableLayout.html">tableLayout</a>&gt;<br/>
+				&nbsp;&nbsp;&lt;/<a href="Gui4jView.html">View</a>&gt;<br></br>
+		</tt><p/>
+		As can be seen in this example, the include mechanism allows also to duplicate definitions. Without this duplication technique, one component identifier
+		must not be used twice.<p/>
+		<h3>Controller delegation</h3>
+		The base reference for all method calls in a xml file is the current controller. When including other xml files, another call base might be specified 
+		with the <tt>controller</tt> attribute:<br/><br/>
+		<tt>
+		    &lt?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;<br>
+			&lt;!DOCTYPE <a href="Gui4jView.html">View</a> SYSTEM &quot;<a href="view.dtd">view.dtd</a>&quot;&gt;<br>
+				&nbsp;&nbsp;&lt;<a href="Gui4jView.html">View</a>&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;Include url=&quot;basic.xml&quot; alias=&quot;incA&quot; <b>controller</b>=&quot;getControllerA&quot;/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;Include url=&quot;basic.xml&quot; alias=&quot;incB&quot; <b>controller</b>=&quot;getControllerB&quot;/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="tableLayout.html">tableLayout</a> guiId=&quot;myedits&quot; rows=&quot;p&quot; cols=&quot;p,p&quot;&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="placeTl.html">placeTl</a> row=&quot;0&quot; col=&quot;0&quot; id=&quot;incA/myedit&quot;/&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="placeTl.html">placeTl</a> row=&quot;0&quot; col=&quot;1&quot; id=&quot;incB/myedit&quot;/&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<a href="tableLayout.html">tableLayout</a>&gt;<br/>
+				&nbsp;&nbsp;&lt;/<a href="Gui4jView.html">View</a>&gt;<br></br>
+		</tt><p/>
+		In that example, the file <tt>basic.xml</tt> is included where the definitions with alias <i>incA</i> uses the controller returned by the method
+		<tt>getControllerA</tt>, and the definitions with alias <i>incB</i> uses the controller returned by <tt>getControllerB</tt>.<p/>
+		This concept is usually used, to divide complex graphical user interfaces into sub forms where each sub form is handled by a separate controller
+		or to reuse similar definitions/layouts.
+		<h3>Parameter instatiation</h3>
+		The parameter concept allows to refer to named components without a definition. When this file is included, these parameters must be
+		instantiated using the <tt>Arg</tt> tag inside the <tt>Include</tt> element.
+		Content of <tt>comp.xml</tt><br/><br/>
+		<tt>
+		    &lt?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;<br>
+			&lt;!DOCTYPE <a href="Gui4jView.html">View</a> SYSTEM &quot;<a href="view.dtd">view.dtd</a>&quot;&gt;<br>
+				&nbsp;&nbsp;&lt;<a href="Gui4jView.html">View</a>&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>Param id=&quot;compA&quot;</b>/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>Param id=&quot;compB&quot;</b>/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="tableLayout.html">tableLayout</a> guiId=&quot;main&quot; rows=&quot;p&quot; cols=&quot;p,p&quot;&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="placeTl.html">placeTl</a> row=&quot;0&quot; col=&quot;0&quot; id=&quot;compA&quot;/&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="placeTl.html">placeTl</a> row=&quot;0&quot; col=&quot;1&quot; id=&quot;compB&quot;/&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<a href="tableLayout.html">tableLayout</a>&gt;<br/>
+				&nbsp;&nbsp;&lt;/<a href="Gui4jView.html">View</a>&gt;<br></br>
+		</tt><p/>
+		Content of <tt>use.xml</tt><br/><br/>
+		<tt>
+		    &lt?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;<br>
+			&lt;!DOCTYPE <a href="Gui4jView.html">View</a> SYSTEM &quot;<a href="view.dtd">view.dtd</a>&quot;&gt;<br>
+				&nbsp;&nbsp;&lt;<a href="Gui4jView.html">View</a>&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;Include url=&quot;comp.xml&quot; alias=&quot;comp&quot;&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>Arg param=&quot;compA&quot; id=&quot;idA&quot;</b>/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>Arg param=&quot;compB&quot; id=&quot;idB&quot;</b>/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Include&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="edit.html">edit</a> guiId=&quot;idA&quot; value=&quot;getValueA&quot; setValue=&quot;setValueA(?value)&quot;/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="edit.html">edit</a> guiId=&quot;idB&quot; value=&quot;getValueB&quot; setValue=&quot;setValueB(?value)&quot;/&gt;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="tableLayout.html">tableLayout</a> guiId=&quot;someId&quot; rows=&quot;...&quot; cols=&quot;...&quot;&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href="placeTl.html">placeTl</a> row=&quot;0&quot; col=&quot;0&quot; id=&quot;<b>comp/main</b>&quot;/&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<a href="tableLayout.html">tableLayout</a>&gt;<br/>
+				&nbsp;&nbsp;&lt;/<a href="Gui4jView.html">View</a>&gt;<br></br>
+		</tt><p/>
+	</body>	
+</html>

@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Param
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Parameters in xml files</h1>
+        All referenced components in a xml description must exist except those specified in <tt>Param</tt> elements:<br/><br/>
+        <tt>&lt;Param id=&quot;button&quot;/&gt;</tt><br/><br/>
+        In this example a parameter named <tt>button</tt> is introduced. Other descriptions in the same file might refer to this
+        name. When including this file with <a href="Gui4jInclude.html">Include</a> a value for this parameter must be provided
+        using the <tt>Arg</tt> element:<br/><br/>
+        <tt>...<br/>
+        	&lt;Include ...&gt;<br/>
+        	  &nbsp;&nbsp;&lt;Arg param=&quot;button&quot; id=&quot;myCloseButton&quot;/&gt;<br/>
+        	&lt;/Include&gt;<br/>
+        	...<br/>
+        	&lt;button guiId=&quot;myCloseButton&quot .../&gt;<br/><br/>
+        </tt>
+        This concept can be used to provide GUI templates (see the Tips &amp; Tricks section). See also 
+        <a href="Gui4jInclude.html">Include</a> for the usage about <tt>Arg</tt> and <tt>Param</tt>.
+	</body>	
+</html>

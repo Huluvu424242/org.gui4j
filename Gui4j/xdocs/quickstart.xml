@@ -1,0 +1,82 @@
+<document>
+    <properties>
+        <title>Quickstart</title>
+    </properties>    
+    <body>
+		<section name="Quickstart">
+		<p>
+		The complete source code of the following quickstart example is contained in the folder
+		<i>org/gui4j/doc/examples/quickstart</i> in the zip file <a href="gui4jdocs/examples-src.zip">examples-src.zip</a>
+		</p>
+		
+		<p>The example can be run with the command:</p>
+        <tt>java -cp gui4j.jar;examples.jar org.gui4j.doc.examples.quickstart.Main</tt>
+
+		<subsection name="Initializing gui4j">
+		<p>
+		One of the first things you must do is to initialize gui4j. For initialization a properties file with all
+			possible components is necessary. The syntax is
+		</p>
+			<source>
+xmlTagName = gui4jFactoryClassName</source>
+		<p>
+			The components are initialized lazy on first use. The file <a href="gui4jdocs/gui4jComponents.properties">gui4jComponents.properties</a>
+			contains the current list of all supported components.
+		</p>
+        <p> The following lines initialize gui4j with an unlimited number of worker threads, with validation of xml 
+            files and without detailed logging of method calls: </p>
+		<source>
+URL url = Main.class.getResource(&quot;/org/gui4j/doc/examples/quickstart/gui4jComponents.properties&quot;);
+<b>int</b> numberOfWorkerThreads = -1;
+<b>boolean</b> validateXML = <b>true</b>;
+<b>boolean</b> logInvoke = <b>false</b>;
+Gui4j gui4j = Gui4jFactory.createGui4j(validateXML, logInvoke, numberOfWorkerThreads, url);</source>
+		</subsection>
+
+        
+          
+		
+		<subsection name="Creating a window">
+			<p>
+		The gui4j instance contains factory methods for creating views and dialogs. To create a view, a xml resource file
+		is necessary and a controller handling the method calls.
+			</p>
+		<source>
+<b>String</b> resourceName = &quot;main.xml&quot;;
+<b>String</b> title = &quot;My first application&quot;;
+<b>boolean</b> readOnlyMode = <b>false</b>;
+Gui4jController controller = <b>this</b>;
+Gui4jView gui4jView = gui4j.createView(resourceName, controller, title, readOnlyMode);</source>
+        <p>
+        A controller must implement the interface <a href="apidocs/org/gui4j/Gui4jController.html">Gui4jController</a> 
+        </p>
+		</subsection>
+        
+        <subsection name="Displaying a window">
+        <source>
+gui4jView.prepare();
+gui4jView.show();</source>
+		</subsection>
+		
+		
+        <subsection name="The resource file">
+        	<p>
+        The resource file <i>main.xml</i> must contain a component definition with the special guiId <i>TOP</i>. This component is the root
+        of the window containing all other components in a tree structure. There is also another special identifier with the
+        name <i>TOP</i> refering to an optional menu.
+        	</p>
+        <source>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;?&gt;
+&lt;!DOCTYPE View SYSTEM &quot;view.dtd&quot;&gt;
+&lt;View&gt;
+  &lt;borderLayout guiId=&quot;TOP&quot;&gt;
+   &lt;placeBl anchor=&quot;center&quot;&gt;
+    &lt;label text=&quot;'My first application'&quot;/&gt;
+   &lt;/placeBl&gt;
+  &lt;/borderLayout&gt;
+&lt;/View&gt;</source>
+        </subsection>
+
+		</section>
+    </body>
+</document>

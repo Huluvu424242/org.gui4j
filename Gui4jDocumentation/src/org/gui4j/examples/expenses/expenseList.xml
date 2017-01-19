@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE View SYSTEM "view.dtd">
+<View top="main">
+    <!-- -->
+    <!-- Includes -->
+    <Include url="styles.xml" alias="styles"/>
+    <!-- -->
+    <!-- Menu -->
+    <menuBar guiId="MENU">
+        <menu text="'File'">
+            <menuItem text="'Exit'" actionCommand="actionExit"/>
+        </menu>
+    </menuBar>
+    <!-- -->
+    <!-- Main layout: toolbar and content -->
+    <borderLayout guiId="main" vSpacing="5">
+        <placeBl anchor="north" id="toolbar"/>
+        <placeBl anchor="center" id="content"/>
+    </borderLayout>
+    <!-- -->
+    <!-- Toolbar -->
+    <toolbar guiId="toolbar" orientation="horizontal">
+        <button actionCommand="actionCreateRecord" icon="res.iconCreate" focusable="~f"/>
+        <button actionCommand="actionEditSelectedRecord" icon="res.iconEdit" focusable="~f" 
+            enabled="{eSelectedRecordChanged}isRecordSelected"/>
+        <button actionCommand="actionDeleteSelectedRecord" icon="res.iconDelete" focusable="~f" 
+            enabled="{eSelectedRecordChanged}isRecordSelected"/>
+    </toolbar>
+    <!-- -->
+    <!-- Content: table and buttons -->
+    <borderLayout guiId="content" hSpacing="5">
+        <placeBl anchor="center" id="table"/>
+        <placeBl anchor="east">
+            <borderLayout>
+                <placeBl anchor="north" id="buttons"/>
+            </borderLayout>
+        </placeBl>
+    </borderLayout>
+    <!-- -->
+    <!-- Table of expense records (without a scrollpane, the table won't display headers) -->
+    <scrollPane guiId="table" border="res.borderEmpty">
+        <table content="{eRecordListModified}getExpenseRecords" contentType="ExpenseRecord" rowSelectionAllowed="true" 
+            onRowSelect="setSelectedRecord(?item)" refresh="{eRecordsChanged}" popup="popup" popupContext="?item">
+            <tableColumn name="'Id'" value="?item.getRecordId" setValue="?item.setRecordId(?value)"/>
+            <tableColumn name="'Date'" value="conv.day2str(?item.getDay)" 
+                setValue="?item.setDay(conv.str2Day(?value))"/>
+            <tableColumn name="'Type'" listType="ExpenseType" list="getExpenseTypes" listItem="?item.getExpenseType" 
+                value="?listItem.getText" setValue="?item.setExpenseType(?value)"/>
+            <tableColumn name="'Amount'" alignment="right" value="conv.int2str(?item.getAmount)" 
+                setValue="?item.setAmount(conv.str2int(?value))"/>
+        </table>
+    </scrollPane>
+    <!-- -->
+    <!-- Popup Menu for table -->
+    <popupMenu guiId="popup">
+        <popupMenuItem contextType="ExpenseRecord" text="'Edit Record'" actionCommand="actionEditRecord(?context)" 
+            icon="res.iconEdit"/>
+        <separator/>    
+        <popupMenuItem contextType="ExpenseRecord" text="'Delete Record'" actionCommand="actionDeleteRecord(?context)" 
+            icon="res.iconDelete"/>
+    </popupMenu>
+    <!-- -->
+    <!-- Buttons -->
+    <gridLayout guiId="buttons" cols="1" rows="3" vSpacing="3">
+        <placeGl row="0" col="0">
+            <button text="'Create Record'" actionCommand="actionCreateRecord" icon="res.iconCreate" />
+        </placeGl>
+        <placeGl row="1" col="0">
+            <button text="'Edit Record'" actionCommand="actionEditSelectedRecord" icon="res.iconEdit" 
+                enabled="{eSelectedRecordChanged}isRecordSelected"/>
+        </placeGl>
+        <placeGl row="2" col="0">
+            <button text="'Delete Record'" actionCommand="actionDeleteSelectedRecord" icon="res.iconDelete" 
+                enabled="{eSelectedRecordChanged}isRecordSelected"/>
+        </placeGl>
+    </gridLayout>
+</View>

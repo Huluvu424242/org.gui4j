@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gui4j">
+    <body>
+        <links>
+            <item name="beck et al. projects" href="http://www.bea-projects.de"/>
+            <item name="gui4j Homepage" href="http://www.gui4j.org"/>
+            <item name="Maven" href="http://maven.apache.org/"/>
+        </links>
+        <menu name="gui4j">
+            <item href="/index.html" name="Home" ></item>
+            <item href="/quickstart.html" name="Quickstart" ></item>
+            <item href="/gui4jdocs/index.html" name="Reference" target="_blank"></item>
+            <item href="/apidocs/index.html" name="Javadocs" target="_blank"></item>
+            <item href="http://sourceforge.net/project/showfiles.php?group_id=137154" name="Download"></item>
+        </menu>
+        <footer>
+            <A href="http://sourceforge.net">
+                <IMG src="http://sourceforge.net/sflogo.php?group_id=137154&amp;type=1" width="88" height="31" 
+                    border="0" alt="SourceForge.net Logo" />
+            </A>
+            <A href="http://www.java.net">
+                <IMG src="javanet.bmp" width="90" height="25" 
+                    border="0" alt="Java.net Logo" />
+            </A>
+        </footer>
+    </body>
+</project>

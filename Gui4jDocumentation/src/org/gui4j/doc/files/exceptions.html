@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Exception Handling
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Exception Handling</h1>
+		Each exception thrown by a method call initiated by the framework is handled by the framework. There is a sophisticated excepition
+		handling integrated in the framework. This mechanism may not only be used for errors. It is also useful to handle gui validation errors
+		using exceptions.<p/>
+		Each controller must implement the method<p/>
+		<tt>
+		 <b>public</b> Gui4jExceptionHandler getExceptionHandler()<br/>
+		 {<br/>
+		 &nbsp;&nbsp;...<br/>
+		 }
+		</tt><p/>
+		If an exception <tt>t</tt> of type <tt>T</tt> occurs during a call initiated by gui4j, the instance returned by the above method 
+		is searched for methods	with the following signature:<p/>
+		<tt>
+		 <b>public void</b> handleException(T exception)<br/>
+		 {<br/>
+		 &nbsp;&nbsp;...<br/>
+		 }
+		</tt><p/>
+		If no such method can be found, then the search continues with the super types of <tt>T</tt>. If no method can be found for each super
+		type, then the method<p/>
+		<tt>
+		 <b>public</b> Gui4jExceptionHandler getDelegationExceptionHandler()<br/>
+		 {<br/>
+		 &nbsp;&nbsp;...<br/>
+		 }
+		</tt><p/>
+		is executed and the search continues with that instance.<br/>
+		If after searching in all exception handlers and for all super types, no proper method was found, then an internal error is raised. An 
+		error handler for these internal errors can be specified in the <tt>Gui4j</tt> instance which was necessary to initialize the framework. The
+		default error handler simply shows a JOptionPane with the error message.
+	</body>	
+</html>

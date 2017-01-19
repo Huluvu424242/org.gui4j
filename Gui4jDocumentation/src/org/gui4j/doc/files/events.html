@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Events
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Events</h1>
+		Using gui4j, the complete graphical user interface is defined in xml. The xml definitions refer to methods and instances in
+		the Java code. The Java code itself has no reference to the xml file and no reference to graphical user interface components. The
+		question arises how the Java code can control the user interface. The short answer is: It's not possible. However, the
+		same effect can be achieved using the event concept.<br/><br/>
+	
+		Let us consider the enabled state of a button. Using the Swing API directly, we have a reference to the corresponding button and changing
+		the state means to call the <tt>setEnabled(boolean state)</tt> method on that button. In gui4j we have (intentionally) no reference to
+		the Swing button, so we can't call the <tt>setEnabled</tt> method. However, the xml button definition has an attribute for the enabled 
+		state:<br/><br/>
+		<tt>
+			&lt;button text=&quot;'Save'&quot; enabled=&quot;isSaveButtonEnabled&quot; actionCommand=&quot;actionSave&quot;/&gt;<br/><br/>
+		</tt>
+		The method <tt>isSaveButtonEnabled</tt> is executing when the user interface is created. So initially, the button has the correct
+		enabled state. The question still is how to change the state during runtime. All we need is to inform the button that it should
+		re-evaluate the method <tt>isSavedButtonEnabled</tt>. For this purpose, there is the event concept. The method call can be preceeded by
+		one or more events. Events are specified before the method call in braces and separated by comma:<br/><br/>
+		<tt>
+			&lt;button text=&quot;'Save'&quot; enabled=&quot;{getEvent1,getEvent2}isSaveButtonEnabled&quot; actionCommand=&quot;actionSave&quot;/&gt;<br/><br/>
+		</tt>
+		A event is an arbitrary method call (or field access) returning an instance of type <tt>org.gui4j.Event</tt>. The succeeding methods registers 
+		itself by the defined events. Whenever one of these events is fired (by the Java code), the method re-evaluates its value and applies the change to the
+		graphical component. Note that several components might use the same event (a field variable <tt>eRefresh</tt> in the controller instance, e.g.).<br/><br/>
+		In this documentation all attributes with method calls capable of events are denoted by <i>event aware</i>.
+	</body>	
+</html>

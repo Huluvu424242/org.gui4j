@@ -1,0 +1,19 @@
+<document>
+    <properties>
+        <title>About</title>
+    </properties>
+    <body>
+        <section name="gui4j - Swing GUIs in XML">
+            <p>
+        gui4j is a framework for describing Java Swing GUIs completely in XML.</p>
+        <p>The graphical user interface 
+        is created dynamically based on the XML definitions. Each GUI window is associated with exactly one top-level 
+        XML file. Each XML file can dynamically include other XML files to support complex GUI definitions. Each XML 
+        file is associated with a java object that acts as both a Controller and a Model for the 
+        GUI. There is a strong layer separation between the GUI and the Controller: GUI definitions in the XML files 
+        can access all Java methods of the Controller, but Java methods cannot access any GUI elements directly. Events 
+        are used to trigger changes in the GUI.</p>
+        <p> Gui4j requires Java 1.4.0 or higher. </p>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE View SYSTEM "view.dtd">
+<View>
+	<ClassAlias class="org.gui4j.examples.tree.TreeMainController$Root" name="Root"/>
+	<ClassAlias class="org.gui4j.examples.tree.TreeMainController$Item" name="Item"/>
+	<tableLayout guiId="TOP" cols="f" rows="f">
+		<placeTl row="0" col="0" id="main"/>	
+	</tableLayout>
+	
+	<splitPane guiId="main">
+		<Ref id="tree"/>
+		<Ref id="cardLayout"/>
+	</splitPane>
+	
+	<tree guiId="tree" root="getTreeRoot">
+		<node value="'Root'" contentType="Root" children="getChildrenOfRoot(?item)" onSelect="actionSelectRoot(?item)"/>
+		<node value="?item.getNodeText" contentType="Item" children="?item.getChildren" onSelect="actionSelectItem(?item)"/>
+	</tree>
+	
+	<cardLayout guiId="cardLayout" default="empty" refresh="{eSwitch}">
+		<placeCl condition="displayRootLabel" id="rootLabel"/>
+		<placeCl condition="displayItemLabel" id="itemLabel"/>
+	</cardLayout>
+	
+	<label guiId="empty" text="'Empty label'"/>
+	<label guiId="rootLabel" text="'Root label'"/>
+	<label guiId="itemLabel" text="'Item label'"/>
+</View>

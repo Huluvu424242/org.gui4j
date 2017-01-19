@@ -1,0 +1,124 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Tips and Tricks
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Tips and Tricks</h1>
+		<p>This section contains general Tips and Tricks when working with gui4j.</p>
+		<ul>
+			<li><b>KeyMaps</b><br/>
+				Inline keyMaps directly into your GUI description with any special settings (i.e. keyboard shortcuts
+				for button execution on specific keys), but place
+				generic keyMaps like setting TAB to ENTER in a table to a common included XML file 
+				(e.g. templates/keyMaps.xml).<br/>
+				This will increase reusability of general definitions.
+				<br/>&nbsp;<br/>
+				<hr width="30%"/>
+			</li>
+			<li><b>Styles</b><br/>
+				Instead of declaring attributes in every element of a specific form, exclude these common
+				attributes and place them in a extra file (i.e. config/styles.xml). Include this file by use 
+				of a <a href="Gui4jInclude.html">Include</a>.
+				<br/>&nbsp;<br/>
+				<hr width="30%"/>
+			</li>
+			<li><b>Layout</b><br/>
+				It is useful to work with low nesting depths. When doing complex layouts, the XML-structure
+				might become difficult to read. So only declare real GUI components only if they require
+				one or two lines. Otherwise use the <tt>id</tt> attribute as seen on all layouting 
+				placing elements (e.g. <a href="borderLayout.html">borderLayout</a>'s 
+				<a href="placeBl.html">placeBl</a>) or the <a href="Gui4jRef.html">Ref</a> element 
+				to declare a reference to another GUI component.
+				<br/>&nbsp;<br/>
+				<hr width="30%"/>
+			</li>
+			<li><b>GUI templates</b><br/>
+				When the same component structure or layout is used several times in an application, 
+				it can be extracted to a separate file and be defined only once.<br/>
+				The following example shows a simple, but useful layout:<br/>
+				<table border="0">
+					<tr>
+						<td>File <tt>tabledialog.xml</tt>:
+							<pre>
+&lt;View&gt;
+	&lt;Param id="table" /&gt;	
+	&lt;Param id="tablebuttons" /&gt;	
+	&lt;Param id="buttons" /&gt;		
+	&lt;Param id="header" /&gt;			
+	&lt;Include url="../config/styles.xml" alias="styles"/&gt;
+	&lt;!-- --&gt;	
+	&lt;!-- Layout --&gt;
+	&lt;borderLayout guiId="top"&gt;
+		&lt;placeBl anchor="north" id="header"/&gt;				
+		&lt;placeBl anchor="center" id="tableandbuttons" /&gt;
+		&lt;placeBl anchor="south" id="buttonrow"/&gt;				
+	&lt;/borderLayout&gt;	
+	&lt;!-- --&gt;	
+	&lt;!-- Buttonrow --&gt;		
+	&lt;borderLayout guiId="buttonrow"&gt;
+		&lt;placeBl anchor="east" id="buttons"/&gt;
+	&lt;/borderLayout&gt;
+	&lt;!-- --&gt;	
+	&lt;!-- Table and Buttons--&gt;		
+	&lt;borderLayout guiId="tableandbuttons" &gt;
+		&lt;placeBl anchor="center" id="table"/&gt;
+		&lt;placeBl anchor="east" id="tablebuttonrow"/&gt;
+	&lt;/borderLayout&gt;
+	&lt;!-- --&gt;	
+	&lt;!-- Table Buttons --&gt;
+	&lt;borderLayout guiId="tablebuttonrow"&gt;
+		&lt;placeBl anchor="north" id="tablebuttons"/&gt;
+	&lt;/borderLayout&gt;
+	&lt;!-- --&gt;
+&lt;/View&gt;
+							</pre>
+							<center>file: <tt>tabledialog.xml</tt></center>
+							<br/>&nbsp;<br/>
+						</td>
+						<td>
+							<img src="tabledialog.gif" alt="GUI example of XML-description"/>
+							<center>GUI example of XML-description</center>
+							<br/>&nbsp;<br/>
+							Note: The <tt>tabledialog.xml</tt> only does layouting. This picture shows a GUI with 
+							components. The components have only been integrated to give width and hight to the 
+							layout.
+							<br/>&nbsp;<br/>
+						</td>
+					</tr>
+				</table>
+				As you can see, by use of the <a href="Gui4jParam.html">Param</a> element, four
+				parameters are defined. To use this layout definition you simply include it in your
+				GUI definition and define the parameter values:<br/>
+				<pre>
+&lt;View top="layout/top"&gt;
+	&lt;Include url="tabledialog.xml" alias="layout"&gt;
+		&lt;Arg id="myTable" param="table"/&gt;
+		&lt;Arg id="myTablebuttons" param="tablebuttons"/&gt;
+		&lt;Arg id="myButtons" param="buttons"/&gt;
+		&lt;Arg id="myHeader" param="header"/&gt;		
+	&lt;/Include&gt;
+	[...]
+	&lt;table guiId="myTable" [...] &gt;
+		[...]
+	&lt;/table&gt;
+	[...]
+&lt;/View&gt;
+				</pre>
+				The <tt>tabledialog.xml</tt> file is included and four components ("myTable" etc.)
+				are mapped to the layout template's parameters.<br/>
+				The layout is used by defining it's "top" component (fully qualified as "layout/top")
+				as the top component of your <tt>&lt;View&gt;.<br/><br/>
+				<br/>&nbsp;<br/>
+				<hr width="30%"/>
+			</li>
+			<!--li><b>TITLE</b><br/>
+				TEXT
+				<br/>&nbsp;<br/>
+				<hr width="30%"/>
+			</li-->
+		</ul>
+	</body>
+</html>

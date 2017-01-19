@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Logging
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Logging</h1>
+		<p>gui4j uses <a href="http://jakarta.apache.org/commons/logging/">Jakarta Commons Logging</a> as its logging API.
+In your project you should therefore initialize a compatible logging framework. Experiment with different
+log levels to see what is being logged. In normal operations, you will usually use WARN or INFO.</p>
+		<p>When creating your <tt>Gui4j</tt> instance via the <tt>Gui4jFactory</tt>, you must supply a parameter
+that defines if method invocations from the frameworks into your controllers should be logged. You can set
+this parameter to <tt>true</tt> in order to debug problems related to method calls. Due to the number
+of log messages produced, you should set this parameter to <tt>false</tt> in production environments.
+		</p>
+		<p>If you get a stacktrace caused by a gui4j worker thread, you will possibly want to know
+which gui4j method call caused the worker thread to run. To get this additional information in case
+of an internal gui4j error, you can call <tt>Gui4j.setTraceWorkerInvocation(true)</tt>. This can
+be a great help in debugging. Don't turn this feature on in production, since the internal overhead of
+creating a stacktrace for each worker invocation might be high.
+		</p>
+	</body>	
+</html>

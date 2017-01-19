@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE View SYSTEM "view.dtd">
+<View>
+    <!-- Alias for Domain classes -->
+    <ClassAlias name="ExpenseRecord" class="org.gui4j.examples.expenses.ExpenseRecord"/>
+    <ClassAlias name="ExpenseType" class="org.gui4j.examples.expenses.ExpenseType"/>
+    <!-- Alias for AWT/Swing classes -->
+    <ClassAlias name="Color" class="java.awt.Color"/>
+    <!-- -->
+    <!-- *** Styles *** -->
+    <!-- -->
+    <!-- Default Style -->
+    <Style name="Default">
+        <Style_textArea focusKeysForward="TAB, ctrl TAB" focusKeysBackward="shift TAB, ctrl shift TAB" width="30" 
+            visibleRows="4" lineWrap="true"/>
+    </Style>
+    <!-- -->
+    <!-- Edit Form Style -->
+    <Style name="editForm" extends="Default">
+        <Style_labelForm hSpacing="5" vSpacing="2"/>
+        <Style_label hAlignment="right" suffix="':'" vAlignment="center"/>
+        <Style_edit editable="~t" />
+        <Style_textArea editable="~t" />
+        <Style_comboBox enabled="~t"/>
+        <Style_list enabled="~t" />
+        <Style_checkBox enabled="~t"/>
+    </Style>
+    
+</View>

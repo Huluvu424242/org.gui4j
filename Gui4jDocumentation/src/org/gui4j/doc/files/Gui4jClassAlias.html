@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Type Alias
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Type Alias</h1>
+		 Type aliass are used to declare Java classes to gui4j. For some elements gui4j needs information about the
+		 element type (<a href="combobox.html">Combobox</a>, e.g.) to support correct typed method calls. In such
+		 cases only introduced type aliases using the element <tt>ClassAlias</tt> are accepted. It can only be 
+		 declared right after	the <a href="Gui4jInclude.html">Include</a> elements.<br/>
+		 Note that type aliases might
+		 be grouped in a single file xml file (<tt>types.xml</tt>, e.g.) and included using <a href="Gui4jInclude.html">Include</a>.<br/><br/>
+					<tt>
+						&lt;ClassAlias class=&quot;java.util.Map$Entry&quot; name=&quot;Entry&quot;/&gt;<br/><br/>
+					</tt>
+					The <tt>ClassAlias</tt> has two attributes:<br/>
+					<ul>
+						<li><tt>class</tt>:<br/>
+							Use the fully qualified class name. Nested inner classes are written by use of 
+							the $ symbol. E.g. java.util.Map$Entry
+						</li><br></br>
+						<li><tt>name</tt>:<br/>
+							Choose the name under which you want to use that type in gui4j XML-files.
+						</li>
+					</ul>
+	</body>	
+</html>

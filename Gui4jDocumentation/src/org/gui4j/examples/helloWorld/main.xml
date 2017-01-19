@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE View SYSTEM "view.dtd">
+<View>
+	<borderLayout guiId="TOP">
+		<placeBl anchor="center">
+			<label text="getHelloWorldText"/>
+		</placeBl>
+	</borderLayout>
+	<!-- -->
+	<menuBar guiId="MENU">
+		<menu text="'File'">
+			<menuItem text="'Exit'" actionCommand="actionExit"/>
+		</menu>
+	</menuBar>
+	<!-- -->
+</View>

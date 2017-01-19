@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - View
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>View</h1>
+		<tt>View</tt> is the root element of each xml file. It supports the two 
+		attributes <tt>defaultButton</tt> and <tt>top</tt> (see below). Inside this element all relevant information for the graphical
+		user interface is defined.
+		<h3>View Content</h3>
+		Inside the View element the following xml elements might be used several times. Please note that the list below defines the
+		correct ordering of the elements.
+		<ul>
+			<li><a href="Gui4jParam.html">Param</a>:</li><br>
+				Define parameters to be subsituted when including this file.<br></br>
+			<li><a href="Gui4jInclude.html">Include</a>:</li><br>
+				Include other xml files to structure large descriptions and to divide descriptions for
+				different controllers.<br></br>
+			<li><a href="Gui4jClassAlias.html">ClassAlias</a>:</li><br>
+				Introduce a new alias for a Java class. Note that only these aliases can be used for
+				referencing types.<br></br>
+			<li><a href="Gui4jStyle.html">Style</a>:</li><br>
+				Define a new style. A style specifies default values for elements. When using the style these default
+				values are implicitly used for those attributes that are not not defined. These technique allows to build
+				several views with the same look and feel.<br></br>
+			<li><a href="Gui4jComponent.html">Component</a>:</li><br>
+				Defining a gui component.<br></br>
+		</ul>
+		<h3>View Attributes</h3>
+		<ul>
+			<li><tt>defaultButton</tt></li><br>
+			The value of this attribute is the name of a xml button definition (guiId) to be used as the default button for the view. The default button 
+			is invoked when the user presses <tt>Enter</tt>. For instance:<br></br>
+			<tt>
+				&lt;View defaultButton=&quot;closeButton&quot&gt;<br>
+				  &nbsp;&nbsp;<i>... some defintions</i><br>
+				  &nbsp;&nbsp;&lt;button guiId=&quot;closeButton&quot; text=&quot'Close'&quot; actionCommand=&quot;closeWindows&quot;&gt;<br>
+				&lt;/View&gt;
+			</tt><br></br>
+			<li><tt>top</tt></li><br>
+			The value of this attribute specifies the name of a xml definition which is used as the top level widget (the root) of the window. 
+			If the attribute is not defined, then there must be defition with the name (guiId) of <tt>TOP</tt>.<br></br>
+			<b>Using the top attribute</b><br>
+			<tt>
+				&lt;View top=&quot;main&quot&gt;<br>
+				  &nbsp;&nbsp;<i>... some defintions</i><br>
+				  &nbsp;&nbsp;&lt;tableLayout guiId=&quot;main&quot; cols="..." rows="..."&gt;<br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<i>... some defintions</i><br>
+				  &nbsp;&nbsp;&lt;/tableLayout&gt;<br>
+				  &nbsp;&nbsp;<i>... some defintions</i><br>
+				&lt;/View&gt;<br></br>
+			</tt>
+			<b>Using the top component</b><br>
+			<tt>
+				&lt;View&gt;<br>
+				  &nbsp;&nbsp;<i>... some defintions</i><br>
+				  &nbsp;&nbsp;&lt;tableLayout guiId=&quot;TOP&quot; cols="..." rows="..."&gt;<br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<i>... some defintions</i><br>
+				  &nbsp;&nbsp;&lt;/tableLayout&gt;<br>
+				  &nbsp;&nbsp;<i>... some defintions</i><br>
+				&lt;/View&gt;<br></br>
+			</tt>
+			<li><tt>title</tt></li><br>
+			The value of this attribute is a method call for the title of the window. This title is
+			only used if the title parameter provided in the methods to create windows is <tt>null</tt><br></br>
+			<b>Using the title attribute</b><br>
+			<tt>
+				&lt;View title=&quot;'My Title'&quot&gt;<br>
+				  &nbsp;&nbsp;<i>... some defintions</i><br>
+				&lt;/View&gt;<br></br>
+			</tt>
+			<li><tt>name</tt></li><br>
+			The value of this attribute is a method call for the component name of the created window<br></br>
+			<b>Using the name attribute</b><br>
+			<tt>
+				&lt;View title=&quot;getWindowTitle&quot; name=&quot;getWindowName&quot&gt;<br>
+				  &nbsp;&nbsp;<i>... some defintions</i><br>
+				&lt;/View&gt;<br></br>
+			</tt>
+		</ul>
+	</body>	
+</html>

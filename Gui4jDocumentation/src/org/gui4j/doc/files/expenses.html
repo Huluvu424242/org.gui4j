@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title> Expense Records </title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <h1> Expense Records </h1>
+        <ul>
+            <li> <a href="examples.jar"> examples.jar</a> (compiled code) </li>
+            <li> <a href="examples-src.zip">examples-src.zip</a> (source code) </li>
+        </ul>
+        <!-- -->
+        <h3> Running the example </h3>
+        <p>The example is started using the <tt>ExpenseMain</tt> class in package <tt>org.gui4j.examples.expenses</tt>. 
+            You need gui4j, dom4j, commons-logging and the examples library in you classpath. <br/>From the base 
+            directory (gui4j-x.x) of the latest distribution you can start the example using the following commandline 
+            (here, for gui4 release 1.2.1 under Windows): <br/> <tt>java -cp 
+            gui4j-1.2.1.jar;lib\dom4j-1.6.1.jar;lib\commons-logging-1.0.2.jar;docs\gui4jdocs\examples.jar 
+            org.gui4j.examples.expenses.ExpenseMain</tt></p>
+        <p>The following window appears:<br/><img src="screenshotExpenses.png" alt="Screenshot Expense Records"/> </p>
+        <p>When editing an expense record, the following dialog is shown:<br/><img src="screenshotExpensesDialog.png" 
+            alt="Screenshot Expense Records Dialog"/></p>
+        <!-- -->
+        <h3> XML definitions </h3>
+        <p>The XML definitions can be found in the zip file <a href="examples-src.zip">examples-src.zip</a> in folder 
+            <tt>org.gui4j.examples.expenses</tt>.</p>
+        <!-- -->
+        <h3> Notes </h3>
+        <p> Some interesting points about the example in package <tt>org.gui4j.examples.expenses</tt>: </p>
+        <ul>
+            <li><tt>CheckXML.java</tt> shows how to use <tt>org.gui4j.Gui4jValidator</tt> to check the correctness of 
+                gui4j XML definitions, including type safety of method calls. </li>
+            <li> <tt>expenseList.xml</tt> shows how to use context menus in a table (<tt>popupMenu</tt> component and 
+                <tt>popup</tt> attribute of <tt>table</tt> component)</li>
+            <li><tt>expenseList.xml</tt> shows how to use a <tt>toolbar</tt> component.</li>
+            <li><tt>expenseList.xml</tt> shows how to use a combination of <tt>borderLayout</tt>s and 
+                <tt>gridLayout</tt>s to build typical layouts.</li>
+            <li><tt>expenseList.xml</tt> and <tt>ExpenseListController</tt> show how to use <tt>Gui4jEvent</tt>s to 
+                notify the GUI that it should update itself. Here it is used, for example, to refresh the contents of 
+                the table when an expense record was added or removed.</li>
+            <li><tt>expenseEdit.xml</tt> and <tt>ExpenseEditController</tt> show how to create a modal edit dialog. The 
+                combination of the <tt>labelForm</tt> component and the <tt>StyleBegin</tt>/<tt>StyleEnd</tt> elements 
+                referencing a centrally defined style demonstrates the ability to build consistent and maintinable 
+                GUIs. For example, if you want all edit forms in your application to have its labels left aligned 
+                instead of right aligned you can simply change the <tt>hAlignment</tt> attribute of the "editForm" 
+                style's <tt>Style_label</tt> element.</li>
+            <li>The dialog also incorporates a very basic validation concept: try to edit an expense record and clear 
+                out its "Record Id" and click "Ok". An error symbol will occur with an explanation of the 
+                validation error next to it.</li>
+        </ul>
+    </body>
+</html>

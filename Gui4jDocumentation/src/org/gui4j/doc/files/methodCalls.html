@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<title>
+			gui4j - Documentation - Method Calls
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>	
+	<body>
+		<h1>Method Calls</h1>
+		This is the most important concept in gui4j, since most attributes are based on method calls. In xml this is simply
+		a string which is parsed by the framework and translated into method calls using the reflection API of Java. The
+		framework acts like a simple Java parser.<br/><br/>
+		<tt>
+			&lt;button guiId=&quot;saveButton&quot; text=&quot;'Save'&quot; actionCommand=&quot;saveData&quot;/&gt;<br/><br/>
+		</tt>
+		This example defines a button with name <i>saveButton</i>, displaying the text <tt>Save</tt> and when the user presses
+		the button the action <i>saveData</i> is executed. Note that each view is linked with one controller instance (see the
+		definition of the <tt>View</tt> Constructor). When the framework reads the above xml definition, a method with
+		the name <i>saveData</i> is searched in the class definition of the linked controller and the corresponding super 
+		class definitions. Since the method in the above example has no arguments, the class search considers only methods with
+		no arguments:<br/><br/>
+		<tt>
+			<b>public void</b> saveData()<br/>
+			{<br/>
+			&nbsp;&nbsp;... <i>some action</i></br/>
+			}<br/><br/>
+		</tt>
+		The value of the above <tt>text</tt> attribute is a method call, too. It is a string constant denoted by the special
+		notion using apostrophes. 
+		<h3>Supported notions by the gui4j parser</h3>
+		<ul>
+			<li>
+				<tt>'some text'</tt><br/>
+				The string constant <tt>some text</tt>. The type of this expression is <tt>java.lang.String</tt>.
+			</li><br/><br/>
+			<li>
+				<tt>:SomeTypeAlias.</tt><br/>
+				An expression starting with a colon implies that the following name (here <i>SomeTypeAlias</i>) 
+				is a type alias defined using <a href="Gui4jClassAlias.html">ClassAlias</a>. Usually this notion is
+				used to refer to static fields or static methods, without the need on an instance. The type of this 
+				expression is the type of the defined type alias.<br/><br/>
+				<tt>
+					&lt;ClassAlias class=&quot;java.awt.Color&quot; name=&quot;Color&quot;/&gt;<br/><br/>
+					...<br/><br/>
+					&lt;button text=&quot;'some text'&quot; background=&quot;:Color.WHITE&quot; ... /&gt;
+				</tt>
+			</li><br/><br/>
+			<li>
+				<tt>~c</tt><br/>
+				A boolean constant. For the value true the letters <tt>t,T</tt> are accepted and <tt>f,F</tt> for the value false. The type
+				of this expression is the primitive type <tt>boolean</tt>.
+			</li><br/><br/>
+			<li>
+				<tt>%c</tt><br/>
+				A character constant. The symbol <tt>c</tt> must be a letter. The type of this expression is the primitive type <tt>char</tt>.
+			</li><br/><br/>
+			<li>
+				<tt>$</tt><br/>
+				The current controller instance. The type is the type of the current controller instance. For instance, this notion might
+				be used in method arguments to pass the current controller instance. Note that all method calls implicitly start at the
+				current controller instance.
+			</li><br/><br/>
+			<li>
+				<tt>12352352</tt><br/>
+				A sequence of digits is considered as an integer constant. The type is the primitive type <tt>int</tt>.
+			</li><br/><br/>
+			<li>
+				<tt>12352.352</tt><br/>
+				A sequence of digits containing a dot is considered as a double constant. The type is the primitive type <tt>double</tt>. The
+				exponential notion must not be used.
+			</li><br/><br/>
+			<li>
+				<tt>?name</tt><br/>
+				A named parameter. Some gui4j components support named parameters in attributes to provide dynamic information. The type depends
+				on the correpsonding component. For instance, consider the following example for a combobox definition:<br/><br/>
+				<tt>
+					&lt;comboBox content=&quot;getEntries&quot; contentType=&quot;EntryType&quot; <br/>
+					&nbsp;&nbsp;&nbsp;value=&quot;?item.getText&quot;<br/>
+					&nbsp;&nbsp;&nbsp;onSelect=&quot;selectEntry(?item)&quot;/&gt;
+				</tt><br/><br/>
+				In this example the comboBox gets the entries to be displayed by the method <tt>getEntries</tt> (method call of the <tt>content</tt> attribute). 
+				The type of these entries is defined in the <tt>contentType</tt> attribute and is here
+				the type alias <tt>EntryType</tt> (this type alias must be introduced with <a href="Gui4jClassAlias.html">ClassAlias</a>). Rather
+				to use the <tt>toString</tt> method of the entry instance (as the Swing API does), the method call of the value attribute is used. This
+				method is called for each instance and the named parameter is substitued correspondingly. When the user selects an entry of the comboBox,
+				the method call of the <tt>onSelect</tt> attribute is executed where the named parameter <tt>?item</tt> corresponds to the
+				selected entry.
+			</li><br/><br/>
+		</ul>
+		<h3>Composition principles</h3>
+		There are three composition principles:
+		<ul>
+			<li><b>Argument composition</b><br/>
+		    Method calls might be composed using argument composition. Arguments are enclosed by parenthesis and separated by comma. This
+		    corresponds to the argument notion in Java. In contrast to Java but for simplicity, empty parenthesis can be omitted.<br/><br/>
+		    <tt>
+		    	&lt;button text=&quot;translate('button_save',getUserLocale(getCurrentUser))&quot; .../&gt;
+		    </tt>
+			</li><br/><br/>
+			<li><b>Delegation composition</b><br/>
+			As in Java, on the result of a method call, another method might be called. The dot notion as used in Java is supported.<br/><br/>
+		    <tt>
+		    	&lt;button text=&quot;translate('button_save',getCurrentUser.getLocale)&quot; .../&gt;
+		    </tt>
+			</li><br/><br/>
+			<li><b>Sequence composition</b><br/>
+				Sequences are denoted by semicolon. They are executed from left to right. The return value of the complete sequence is the
+				return value of the last operation in the sequence. If an exception occurs, the control flow is aborted and the succeeding
+				sequence operation are not executed.<br/><br/>
+				<tt>
+					&lt;comboBox content=&quot;computeEntries;getEntries&quot; contentType=&quot;EntryType&quot; <br/>
+					&nbsp;&nbsp;&nbsp;value=&quot;?item.getText&quot;<br/>
+					&nbsp;&nbsp;&nbsp;onSelect=&quot;selectEntry(?item);refreshDisplay&quot;/&gt;
+				</tt><br/><br/>
+			</li>
+		</ul>
+	</body>	
+</html>

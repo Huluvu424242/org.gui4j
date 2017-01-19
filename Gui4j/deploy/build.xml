@@ -1,0 +1,194 @@
+<project name="Gui4j" default="release" basedir=".">
+    <description>
+        Build Gui4j
+    </description>
+  <!-- set global properties for this build -->
+  <property name="base" location="../.."/>
+  <property name="gui4j" location="${base}/Gui4j"/>
+  <property name="lib" location="${gui4j}/lib"/>
+  <property name="files" location="${base}/Gui4j/files"/>
+  <property name="filesJar" location="${base}/Gui4j/filesJar"/>
+  <property name="gui4jDocumentation" location="${base}/Gui4jDocumentation"/>
+  <property name="build" location="build"/>
+  <property name="buildDoc" location="${build}/doc"/>
+  <property name="dist" location="dist"/>
+  <property name="distGui4j" location="${dist}/gui4j"/> 
+  <property name="distDoc" location="${distGui4j}/doc"/>
+  <property name="distSrc" location="${distGui4j}/src"/>
+  <property name="distLib" location="${distGui4j}/lib"/>
+  <property name="distVersion" location="${dist}/version"/>
+
+  <path id="buildClasspath">	
+    <fileset dir="${lib}"> 	
+     <include name="*.jar"/>
+    </fileset>
+    <!--
+    <fileset dir="${gui4jDocumentation}/lib"> 	
+     <include name="*.jar"/>
+    </fileset>
+    -->
+    <fileset dir="${distGui4j}"> 	
+     <include name="*.jar"/>
+    </fileset>
+  </path> 	
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${dist}"/>
+    <mkdir dir="${distGui4j}"/>
+    <mkdir dir="${distDoc}"/>
+    <mkdir dir="${distSrc}"/>
+    <mkdir dir="${distLib}"/>
+    <mkdir dir="${distVersion}"/>
+    <mkdir dir="${build}"/>
+    <mkdir dir="${buildDoc}"/>
+  </target>
+  
+  
+  <target name="compile ndebug" description="Compile source directory without debug information">
+    <javac srcdir="${srcDir}" destdir="${destDir}" source="1.5" optimize="true">
+      <classpath refid="${classpathRef}"/> 
+    </javac>
+    
+    <copy todir="${destDir}"> 	
+      <fileset dir="${srcDir}"> 	
+        <exclude name="**/*.java"/> 	
+      </fileset> 	
+    </copy> 	
+  </target>
+
+  
+  <target name="compile debug"	description="Compile source directory with debug information">
+    <javac debug="on" srcdir="${srcDir}" destdir="${destDir}" source="1.4" optimize="true">
+      <classpath refid="${classpathRef}"/> 
+    </javac>
+    
+    <copy todir="${destDir}"> 	
+      <fileset dir="${srcDir}"> 	
+        <exclude name="**/*.java"/> 	
+      </fileset> 	
+    </copy> 	
+  </target>
+
+
+	  <target name="Gui4j Source code" depends="init" description="Compile the gui4j files">
+	    <antcall target="compile debug">
+	      <param name="srcDir" value="${gui4j}/src"/>
+	      <param name="destDir" value="${build}"/>
+	      <param name="classpathRef" value="buildClasspath"/>
+	    </antcall>
+	  </target>
+
+	  <target name="Gui4j Documentation Source code" depends="makeJarFile" description="Compile the gui4j documentation">
+	    <antcall target="compile debug">
+	        <param name="srcDir" value="${gui4jDocumentation}/src"/>
+	        <param name="destDir" value="${buildDoc}"/>
+	        <param name="classpathRef" value="buildClasspath"/>
+	    </antcall>
+	  </target>
+
+	  
+	  <target name="makeJarFile" depends="Gui4j Source code" description="Generates the jar-file for gui4j">
+	  	<touch datetime="1/1/2005 0:0 pm">
+	  		<fileset dir="${build}"/>
+	  	</touch>
+		<zip destfile="${distGui4j}/gui4j.jar" duplicate="fail" >
+			<fileset dir="${build}">
+				<exclude name="doc/**"/>
+			</fileset>
+			<fileset dir="${filesJar}">
+			</fileset>
+		</zip>
+	  </target>
+			  
+	  <target name="generateDoc" depends="Gui4j Documentation Source code" description="Generates the documentation">
+	  	<java classname="org.gui4j.doc.DocumentationManager" dir="${distDoc}" classpathref="buildClasspath" classpath="${buildDoc}" fork="true">
+	  		<arg value="${distDoc}"/>
+	  		<!-- arg value="true"/-->
+	  	</java>
+		<zip destfile="${distDoc}/examples.jar" duplicate="fail" >
+			<fileset dir="${build}/doc">
+				<include name="**/examples/**"/>
+			</fileset>
+		</zip>
+		<zip destfile="${distDoc}/examples-src.zip" duplicate="fail" >
+			<fileset dir="${gui4jDocumentation}/src">
+				<include name="**/examples/**"/>
+			</fileset>
+		</zip>
+	  </target>
+	
+	<target name="copyLib">
+		<copy todir="${distLib}">
+			<fileset dir="${lib}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+	</target>
+			  
+	<target name="copyFiles">
+		<copy todir="${distGui4j}">
+			<fileset dir="${files}">
+				<include name="**"/>
+			</fileset>
+		</copy>
+	</target>
+			  
+	<target name="copySrc">
+		<copy todir="${distSrc}">
+			<fileset dir="${gui4j}/src">
+				<include name="**"/>
+			</fileset>
+		</copy>
+	</target>
+			  
+	<target name="copyToVersion">
+		<copy todir="${distVersion}">
+			<fileset dir="${distGui4j}">
+				<include name="**"/>
+			</fileset>
+		</copy>
+	</target>
+			  
+	  <target name="renameVersion" depends="Gui4j Documentation Source code" description="Renames the version directory to the current version">
+	  	<java classname="org.gui4j.ant.RenameToCurrentVersion" dir="${distGui4j}" classpathref="buildClasspath" classpath="${buildDoc}" fork="true">
+	  		<arg value="${distVersion}"/>
+	  	</java>
+	  </target>
+	
+	<target name="zipFiles">
+		<zip destfile="${dist}/gui4j.zip">
+			<fileset dir="${dist}">
+				<include name="gui4j/**"/>
+			</fileset>
+		</zip>
+		<zip destfile="${dist}/gui4j-version.zip">
+			<fileset dir="${dist}">
+				<include name="gui4j-*/**"/>
+			</fileset>
+		</zip>
+	  	<java classname="org.gui4j.ant.RenameToCurrentVersion" dir="${distGui4j}" classpathref="buildClasspath" classpath="${buildDoc}" fork="true">
+	  		<arg value="${dist}/gui4j-version.zip"/>
+	  	</java>
+    </target>
+	
+  <target name="release" description="Generates the jar file and the documentation">
+    <antcall target="clean"/>
+    <antcall target="makeJarFile"/>
+    <antcall target="generateDoc"/>
+    <antcall target="copyFiles"/>
+    <antcall target="copyLib"/>
+    <antcall target="copySrc"/>
+    <antcall target="copyToVersion"/>
+    <antcall target="renameVersion"/>
+    <antcall target="zipFiles"/>
+  </target>
+
+  <!-- Delete all temporarily generated files -->
+  <target name="clean" description="clean up" >
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
