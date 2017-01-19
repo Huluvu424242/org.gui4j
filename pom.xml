@@ -58,6 +58,14 @@
 
     <!-- the project home page -->
     <url>http://www.gui4j.org</url>
+
+    <scm>
+        <url>https://github.com/FunThomas424242/gui4j</url>
+        <connection>scm:git:https://github.com/FunThomas424242/gui4j.git</connection>
+        <developerConnection>scm:git:https://github.com/FunThomas424242/gui4j.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <ciManagement>
         <url>https://github.com/FunThomas424242/gui4j/issues</url>
     </ciManagement>
@@ -137,6 +145,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
                 <configuration>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                     <repositoryId>bintray-funthomas424242-releases</repositoryId>
