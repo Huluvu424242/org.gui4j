@@ -32,6 +32,12 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <mavenVersion>3.3.9</mavenVersion>
+
+        <!-- Control of deployment and publishing to bintray -->
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <updateReleaseInfo>true</updateReleaseInfo>
     </properties>
 
     <!-- details about the organization that 'owns' the project -->
@@ -56,6 +62,19 @@
         <url>https://github.com/FunThomas424242/gui4j/issues</url>
     </ciManagement>
 
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>bintray-funthomas424242-snapshots</id>
+            <name>oss-jfrog-artifactory-snapshots</name>
+            <url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+        </snapshotRepository>
+        <repository>
+            <id>bintray-funthomas424242-releases</id>
+            <name>oss-jfrog-artifactory-releases</name>
+            <url>https://oss.jfrog.org/artifactory/oss-release-local</url>
+        </repository>
+    </distributionManagement>
 
     <!-- jar files the project is dependent on -->
     <dependencies>
@@ -88,6 +107,54 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.7.201606060606</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagNameFormat>@{project.version}-RELEASE</tagNameFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <file>${project.build.directory}/${project.build.finalName}.jar</file>
+                    <repositoryId>bintray-funthomas424242-releases</repositoryId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>funthomas424242-libs@bintray</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>
+                                deploy-file
+                            </goal>
+                        </goals>
+                        <configuration>
+                            <url>https://api.bintray.com/maven/funthomas424242/funthomas424242-libs/${project.artifactId}/;publish=0</url>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
