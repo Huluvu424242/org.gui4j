@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/FunThomas424242/gui4j.svg?branch=master)](https://travis-ci.org/FunThomas424242/gui4j)
+
 Gui4j - Describe Java/Swing GUIs in XML
 =======================================
 www.gui4j.org
