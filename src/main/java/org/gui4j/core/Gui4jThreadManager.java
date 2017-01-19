@@ -413,7 +413,7 @@ public final class Gui4jThreadManager implements ErrorTags, Serializable
                                     && mWorkPackageCountWaitingNormal > 1)
                             {
                                 // nun kann die restliche Arbeit von anderen
-                                // Worken eventuell übernommen werden
+                                // Worken eventuell Ã¼bernommen werden
                                 wakeUpOtherWorkers = true;
                             }
                         }
@@ -518,7 +518,7 @@ public final class Gui4jThreadManager implements ErrorTags, Serializable
                 // Methode auf.
                 // Beim Edit-Feld wird damit im Ok-Fall der
                 // Inhalt nochmals
-                // angezeigt. Außerdem kann damit Validierung
+                // angezeigt. AuÃŸerdem kann damit Validierung
                 // gemacht werden.
                 if (i == 0 && workPackage.mSpecialSuccessHandling && workPackage.mComponentInstance != null)
                 {

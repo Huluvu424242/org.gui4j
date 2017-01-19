@@ -512,7 +512,7 @@ abstract public class Gui4jAbstractComponent implements ErrorTags, Gui4jComponen
      * Gui4jComponents should override this method if they want to supply a context object
      * to its popup menu.
      * @param gui4jComponentInstance
-     * @param mouseEvent das mouse event oder <code>null</code> falls PopUp ohne Maus ausgelöst wurde
+     * @param mouseEvent das mouse event oder <code>null</code> falls PopUp ohne Maus ausgelÃ¶st wurde
      * @return Object
      */
     protected Object getPopupContext(Gui4jComponentInstance gui4jComponentInstance, MouseEvent mouseEvent)
