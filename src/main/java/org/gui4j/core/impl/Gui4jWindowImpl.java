@@ -23,10 +23,6 @@ import javax.swing.JMenuBar;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.gui4j.Gui4jCallBase;
@@ -615,11 +611,12 @@ abstract class Gui4jWindowImpl extends Gui4jSwingContainer implements ErrorTags,
         BufferedImage bi = new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
         Graphics2D big2d = bi.createGraphics();
         c.paint(big2d);
-        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-        JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bi);
-        param.setQuality(quality, false);      
-        encoder.setJPEGEncodeParam(param);      
-        encoder.encode(bi);        
+        ImageIO.write(bi,"jpeg",out);
+//        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//        JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bi);
+//        param.setQuality(quality, false);
+//        encoder.setJPEGEncodeParam(param);
+//        encoder.encode(bi);
     }
 
     public void saveAsPNG(OutputStream out) throws IOException
