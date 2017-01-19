@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/FunThomas424242/gui4j.svg?branch=master)](https://travis-ci.org/FunThomas424242/gui4j)
 
+(This is a fork to deliver the gui4j project of sourceforge.net into a maven repo at bintray)
+
 Gui4j - Describe Java/Swing GUIs in XML
 =======================================
 www.gui4j.org
