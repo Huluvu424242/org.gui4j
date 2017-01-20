@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+ * Copyright 2001-2004 The Apache Software Foundation.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.funthomas424242</groupId>
+    <artifactId>org.gui4j</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1.4</version>
+    <name>gui4j</name>
+    <inceptionYear>2002</inceptionYear>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <mavenVersion>3.3.9</mavenVersion>
+
+        <!-- Control of deployment and publishing to bintray -->
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${project.artifactId}</artifactId>
+        <version>${project.version}</version>
+        <updateReleaseInfo>true</updateReleaseInfo>
+    </properties>
+
+    <!-- details about the organization that 'owns' the project -->
+    <organization>
+        <name>beck et al. projects GmbH</name>
+        <url>http://www.bea-projects.de/</url>
+    </organization>
+
+    <!-- the year the project started -->
+    <description>gui4j is a framework for describing Java Swing GUIs completely in XML. The graphical user interface
+        is created dynamically based on the XML definitions. Each GUI window is associated with exactly one top-level
+        XML file. Each XML file can dynamically include other XML files to support complex GUI definitions. Each XML
+        file is associated with a java object that acts as both a Controller and a Model for the
+        GUI. There is a strong layer separation between the GUI and the Controller: GUI definitions in the XML files
+        can access all Java methods of the Controller, but Java methods cannot access any GUI elements directly. Events
+        are used to trigger changes in the GUI. gui4j requires Java 1.4.0 or higher.
+    </description>
+
+    <!-- the project home page -->
+    <url>http://www.gui4j.org</url>
+
+    <scm>
+        <url>https://github.com/FunThomas424242/gui4j</url>
+        <connection>scm:git:https://github.com/FunThomas424242/gui4j.git</connection>
+        <developerConnection>scm:git:https://github.com/FunThomas424242/gui4j.git</developerConnection>
+        <tag>0.1.4-RELEASE</tag>
+    </scm>
+
+    <ciManagement>
+        <url>https://github.com/FunThomas424242/gui4j/issues</url>
+    </ciManagement>
+
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>bintray-funthomas424242-snapshots</id>
+            <name>oss-jfrog-artifactory-snapshots</name>
+            <url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+        </snapshotRepository>
+        <repository>
+            <id>bintray-funthomas424242-releases</id>
+            <name>oss-jfrog-artifactory-releases</name>
+            <url>https://oss.jfrog.org/artifactory/oss-release-local</url>
+        </repository>
+    </distributionManagement>
+
+    <!-- jar files the project is dependent on -->
+    <dependencies>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+    </dependencies>
+
+    <reports>
+        <report>maven-license-plugin</report>
+        <report>maven-javadoc-plugin</report>
+        <report>maven-changes-plugin</report>
+    </reports>
+
+    <!-- build information for the project -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.7.201606060606</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagNameFormat>@{project.version}-RELEASE</tagNameFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <file>${project.build.directory}/${project.build.finalName}.jar</file>
+                    <repositoryId>bintray-funthomas424242-releases</repositoryId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>funthomas424242-libs@bintray</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>
+                                deploy-file
+                            </goal>
+                        </goals>
+                        <configuration>
+                            <url>
+                                https://api.bintray.com/maven/funthomas424242/funthomas424242-libs/${project.artifactId}/;publish=0
+                            </url>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.7.7.201606060606</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <configuration>
+                        <failOnError>false</failOnError>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+            </plugins>
+
+        </pluginManagement>
+    </build>
+
+    <!-- any mailing lists for the project -->
+    <mailingLists>
+        <mailingList>
+            <name>gui4j user list</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/gui4j-user</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/gui4j-user</unsubscribe>
+        </mailingList>
+        <mailingList>
+            <name>gui4j developer list</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/gui4j-devel</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/gui4j-devel</unsubscribe>
+        </mailingList>
+    </mailingLists>
+
+    <!-- who the developers are for the project -->
+    <developers>
+        <developer>
+            <name>Joachim Schmid</name>
+            <id>joachims</id>
+            <email>joachim.schmid at bea.de</email>
+            <organization>beck et al. projects GmbH</organization>
+            <roles>
+                <role>Creator</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Kay Krüger-Barvels</name>
+            <id>kayk</id>
+            <email>kay.krueger-barvels at bea.de</email>
+            <organization>beck et al. projects GmbH</organization>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Marcus Adlwart</name>
+            <id>marcusa</id>
+            <email>marcus.adlwart at bea.de</email>
+            <organization>beck et al. projects GmbH</organization>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <contributors>
+        <contributor>
+            <name>FunThomas424242 (Thomas Schubert)</name>
+            <roles>
+                <role>Developer</role>
+                <role>Packager</role>
+                <role>Deployer</role>
+            </roles>
+        </contributor>
+    </contributors>
+
+    <profiles>
+        <profile>
+            <id>lint</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.6.1</version>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                            <compilerArgs>
+                                <arg>-verbose</arg>
+                                <arg>-Xlint:all,-options,-path</arg>
+                            </compilerArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+
+            </build>
+
+        </profile>
+
+    </profiles>
+
+</project>
