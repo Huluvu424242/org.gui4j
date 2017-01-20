@@ -95,8 +95,8 @@ public interface Gui4jComponentContainer
     Set getParamIds();
     
     /**
-     * Liefert die Menge der Ids zurück welche durch Parameterinstanziierung
-     * benötigt werden
+     * Liefert die Menge der Ids zurÃ¼ck welche durch Parameterinstanziierung
+     * benÃ¶tigt werden
      * @return Set
      */
     Set getMappedIds();

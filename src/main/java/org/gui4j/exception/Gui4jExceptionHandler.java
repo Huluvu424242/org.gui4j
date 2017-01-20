@@ -1,16 +1,16 @@
 package org.gui4j.exception;
 
 /**
- * Übernimmt die Fehlerbehandlung. Es werden drei unterschiedliche
- * Methodensignaturen unterstützt, wobei in jede dieser drei 
- * Möglichkeiten auch spezifischere Klassen verwendeten werden können.
+ * Ãœbernimmt die Fehlerbehandlung. Es werden drei unterschiedliche
+ * Methodensignaturen unterstÃ¼tzt, wobei in jede dieser drei
+ * MÃ¶glichkeiten auch spezifischere Klassen verwendeten werden kÃ¶nnen.
  * 
  * Falls der errorContext gesetzt ist, wird zuerst nach einer
- * Methode mit beiden Argumenten gesucht. Anschließend erfolgt
+ * Methode mit beiden Argumenten gesucht. AnschlieÃŸend erfolgt
  * die Suche ohne das Argument errorContext.
  * 
  * Der DelegationExceptionHandler dient dazu hierarchisch
- * Exception zu behandeln. Die Suche erfolgt Bottom-Up. Bezüglich
+ * Exception zu behandeln. Die Suche erfolgt Bottom-Up. BezÃ¼glich
  * errorContext gilt, dass zuerst mit beiden Argumenten Bottom-Up
  * gesucht wird und falls keine passende Methode vorhanden war,
  * dann wird mit einem Argument nochmals Bottom-Up gesucht.

@@ -52,7 +52,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * never show a divider border.
  * 
  * @author Karsten Lentzsch
- * @author Kay Krüger-Barvels
+ * @author Kay KrÃ¼ger-Barvels
  * 
  * @see javax.swing.plaf.basic.BasicSplitPaneUI
  */

@@ -505,7 +505,7 @@ public abstract class Gui4jSwingContainer
             mPropertyList = new ArrayList();
             mGui4jComponentInstanceList = new ArrayList();
             mEventList = new ArrayList();
-            // füllen
+            // fÃ¼llen
             if (refresh != null)
             {
                 for (int i = 0; i < refresh.length; i++)

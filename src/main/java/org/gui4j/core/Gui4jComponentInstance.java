@@ -91,7 +91,7 @@ public final class Gui4jComponentInstance
                 return;
             }
         }
-        // nur ausführen, wenn oben etwas nicht definiert ist (=> Fehler)
+        // nur ausfÃ¼hren, wenn oben etwas nicht definiert ist (=> Fehler)
         getGui4j().handleSuccess(getGui4jCallBase(), null);
     }
 
@@ -106,7 +106,7 @@ public final class Gui4jComponentInstance
                 return;
             }
         }
-        // nur ausführen, wenn oben etwas nicht definiert ist (=> Fehler)
+        // nur ausfÃ¼hren, wenn oben etwas nicht definiert ist (=> Fehler)
         Gui4jInternal gui4j = getGui4j();
         if (gui4j != null)
         {

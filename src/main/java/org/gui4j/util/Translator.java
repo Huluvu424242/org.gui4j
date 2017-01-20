@@ -14,7 +14,7 @@ public interface Translator
     String translate(String tag, Object[] args);
     
     /**
-     * Liefert <code>true</code> zurück, falls eine Übersetzung definiert ist
+     * Liefert <code>true</code> zurÃ¼ck, falls eine Ãœbersetzung definiert ist
      * @param tag
      * @return boolean
      */

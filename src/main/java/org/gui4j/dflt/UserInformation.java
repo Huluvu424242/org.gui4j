@@ -3,9 +3,9 @@ package org.gui4j.dflt;
 import org.gui4j.util.Translator;
 
 /**
- * Kann verwendet werden um in der Applikation den Programmablaug 
- * zu unterbrechen um den Benutzer über ein Problem zu informieren.
- * Wird insbesondere von Gui4j verwendet für die Validierung von
+ * Kann verwendet werden um in der Applikation den Programmablauf
+ * zu unterbrechen um den Benutzer Ã¼ber ein Problem zu informieren.
+ * Wird insbesondere von Gui4j verwendet fÃ¼r die Validierung von
  * Eingabewerten.
  */
 public class UserInformation extends RuntimeException
@@ -38,7 +38,7 @@ public class UserInformation extends RuntimeException
 	}
 	
     /**
-     * Liefert den übersetzten Text zurück
+     * Liefert den ï¿½bersetzten Text zurï¿½ck
      * @param translator
      * @return String
      */

@@ -1,10 +1,10 @@
 package org.gui4j.util;
 
 /**
- * Implementierende Klassen müssen eindeutige sog. Nametags für alle ihre
- * Instanzen liefern. Diese Nametags können von anderen Komponenten beliebiger
- * Schichten verwendet werden. Hauptintention für die Einführung: die GUI
- * Schicht benutzt den Nametag von Objekten, um Übersetzungen bzw. Anzeigetexte
+ * Implementierende Klassen mÃ¼ssen eindeutige sog. Nametags fÃ¼r alle ihre
+ * Instanzen liefern. Diese Nametags kÃ¶nnen von anderen Komponenten beliebiger
+ * Schichten verwendet werden. Hauptintention fÃ¼r die EinfÃ¼hrung: die GUI
+ * Schicht benutzt den Nametag von Objekten, um Ãœbersetzungen bzw. Anzeigetexte
  * zu definieren.
  */
 public interface Nameable

@@ -7,7 +7,7 @@ public interface Filter
 {
     /**
      * 
-     * @param object Objekt, für das die Filtereigenschaft abgefragt werden soll.
+     * @param object Objekt, fÃ¼r das die Filtereigenschaft abgefragt werden soll.
      * @return boolean <code>true</code>, falls das Objekt "genommen" werden soll,
      * d.h. wenn das Objekt nicht rausgefiltert wurde. <code>false</code>, falls das Objekt
      * nicht genommen werden soll, d.h. wenn es rausgefiltert wurde.

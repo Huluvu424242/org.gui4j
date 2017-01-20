@@ -649,9 +649,9 @@ public final class Gui4jTree extends Gui4jJComponent
             // ist. Dementsprechend wird der Hintergrund bei einem trailing icon
             // gezeichnet:
             // vorne scheint ein Teil des Knotentexts nicht selektiert zu sein,
-            // während hinten
+            // wÃ¤hrend hinten
             // das icon optisch teil der selektion ist. Statt paint() komplett
-            // selbst zu überschreiben,
+            // selbst zu Ã¼berschreiben,
             // wird hier ein netter workaround mit Hilfe der
             // ComponentOrientation verwendet.
             setComponentOrientation(textPosition == TRAILING ? ComponentOrientation.LEFT_TO_RIGHT
@@ -800,13 +800,13 @@ public final class Gui4jTree extends Gui4jJComponent
             {
                 if (!SwingUtilities.isEventDispatchThread())
                 {
-                    // KKB, MA, 23.7.04: Nicht vollständig nachvollziehbares
+                    // KKB, MA, 23.7.04: Nicht vollstï¿½ndig nachvollziehbares
                     // Problem in FITS (Delete
                     // Measurements)
                     // "behoben" durch Verwendung von "...andWait" statt
                     // "...andContinue". Hm...., wissen
                     // nicht
-                    // mehr, warum "...andContinue" ursprünglich verwendet
+                    // mehr, warum "...andContinue" ursprï¿½nglich verwendet
                     // wurde.
                     // Gui4jThreadManager.executeInSwingThreadAndContinue(new
                     // Runnable()

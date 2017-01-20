@@ -69,7 +69,7 @@ public final class Dialog
 	}
 
     /**
-     * Zeigt ein Text-Eingabefeld an. Wird der Abbrechen-Button gedrückt wird null zurückgegeben.
+     * Zeigt ein Text-Eingabefeld an. Wird der Abbrechen-Button gedrÃ¼ckt wird null zurÃ¼ckgegeben.
      * @param gui4jWindow
      * @param msg
      * @param value
@@ -82,7 +82,7 @@ public final class Dialog
     }
 
     /**
-     * Method zeigt mittels der übergebenen Parameter einen JOptionPane an.
+     * Method zeigt mittels der Ã¼bergebenen Parameter einen JOptionPane an.
      * @param parent
      * @param msg
      * @param title

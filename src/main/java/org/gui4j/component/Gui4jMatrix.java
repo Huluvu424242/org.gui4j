@@ -1261,8 +1261,8 @@ public class Gui4jMatrix extends Gui4jJComponent
 
         private boolean arraysAreValid = false;
         private boolean initialized = false;
-        private int mPageNo = -1; // für Drucken
-        private boolean ignoreBackground = false; // für Drucken ohne
+        private int mPageNo = -1; // fÃ¼r Drucken
+        private boolean ignoreBackground = false; // fÃ¼r Drucken ohne
 
         // Hintergrund (=true)
 

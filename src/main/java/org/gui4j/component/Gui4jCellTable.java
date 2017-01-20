@@ -983,7 +983,7 @@ public class Gui4jCellTable extends Gui4jJComponent
             }
             else
             {
-                mLogger.info("Zeilenname für Zeile " + row + " ist nicht definiert");
+                mLogger.info("Zeilenname fÃ¼r Zeile " + row + " ist nicht definiert");
                 return "";
             }
         }
@@ -1082,7 +1082,7 @@ public class Gui4jCellTable extends Gui4jJComponent
             }
             else
             {
-                mLogger.info(getId() + ": Spaltenname für Spalte " + columnIndex
+                mLogger.info(getId() + ": Spaltenname fÃ¼r Spalte " + columnIndex
                         + " ist nicht definiert in XML Datei: " + getConfigurationName());
                 return " ";
             }

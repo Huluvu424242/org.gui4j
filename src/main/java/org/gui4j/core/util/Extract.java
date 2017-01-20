@@ -1,7 +1,7 @@
 package org.gui4j.core.util;
 
 /**
- * Utility-Klasse für verschiedene Extraktionsfunktionen
+ * Utility-Klasse fÃ¼r verschiedene Extraktionsfunktionen
  */
 public class Extract
 {

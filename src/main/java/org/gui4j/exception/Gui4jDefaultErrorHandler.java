@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 
 /**
- * Default Implementierung für <code>Gui4jErrorHandler</code>. Diese
+ * Default Implementierung fÃ¼r <code>Gui4jErrorHandler</code>. Diese
  * Implementierung zeigt ein Fenster mit einem <b>Ok</b> und
  * einem <b>Abort</b> Button an.
  */
@@ -24,7 +24,7 @@ public class Gui4jDefaultErrorHandler implements Gui4jErrorHandler
 
     /**
      * @return immer die gleiche Instanz von <code>Gui4jErrorHandler</code>, welche
-     * ein Dialogfenster mit <code>Ok</code> und <code>Abort</code> Button enthält.
+     * ein Dialogfenster mit <code>Ok</code> und <code>Abort</code> Button enthÃ¤lt.
     */
     public static Gui4jErrorHandler getInstance()
     {

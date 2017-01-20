@@ -128,7 +128,7 @@ public final class SparseMatrix implements Serializable
     }
     
     /**
-     * Löscht alle Elemente
+     * LÃ¶scht alle Elemente
      */
     public void clear()
     {

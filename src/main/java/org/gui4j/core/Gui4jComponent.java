@@ -58,7 +58,7 @@ public interface Gui4jComponent
     public void dispose(Gui4jComponentInstance gui4jComponentInstance);
     
     /**
-     * Zeigt das PopUp Menü an der Komponente an (falls eines definiert ist).
+     * Zeigt das PopUp MenÃ¼ an der Komponente an (falls eines definiert ist).
      * @param gui4jComponentInstance
      * @param mouseEvent das mouse event, falls PopUp durch Mausaktion gefordert wurde,
      * <code>null</code> falls nicht (z.B. durch Tastatur)
@@ -66,13 +66,13 @@ public interface Gui4jComponent
     public void showPopupMenu(Gui4jComponentInstance gui4jComponentInstance, MouseEvent mouseEvent);
     
     /**
-     * Wird aufgerufen, wenn ein Setter ohne Exception ausgeführt wurde.
+     * Wird aufgerufen, wenn ein Setter ohne Exception ausgefÃ¼hrt wurde.
      * @param gui4jComponentInstance
      */
     public void handleSuccess(Gui4jComponentInstance gui4jComponentInstance);
 
     /**
-     * Wird aufgerufen, wenn ein Setter mit Exception ausgeführt wurde.
+     * Wird aufgerufen, wenn ein Setter mit Exception ausgefÃ¼hrt wurde.
      * @param gui4jComponentInstance
      * @param t
      */

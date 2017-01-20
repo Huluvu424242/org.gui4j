@@ -56,7 +56,7 @@ public class CalendarButton extends JButton implements ActionListener
 
     JPopupMenu popup = null;
 
-    //  SimpleDateFormat format = new SimpleDateFormat(FormatManager.getInstance().getDatePattern()); //[PENDING,mk,29.02.2000: Hier keine Abh‰ngigkeit ins Restprojekt einbauen!]
+    //  SimpleDateFormat format = new SimpleDateFormat(FormatManager.getInstance().getDatePattern()); //[PENDING,mk,29.02.2000: Hier keine Abh√§ngigkeit ins Restprojekt einbauen!]
 
     SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
 

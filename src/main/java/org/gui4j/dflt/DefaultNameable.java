@@ -9,7 +9,7 @@ import org.gui4j.util.Translator;
 
 
 /**
- * Default Implementierung für das Nameable Interface.
+ * Default Implementierung fÃ¼r das Nameable Interface.
  */
 public class DefaultNameable implements Nameable, Serializable
 {
