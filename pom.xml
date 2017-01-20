@@ -22,7 +22,7 @@
     <groupId>com.github.funthomas424242</groupId>
     <artifactId>org.gui4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
     <name>gui4j</name>
     <inceptionYear>2002</inceptionYear>
 
@@ -62,7 +62,7 @@
         <url>https://github.com/FunThomas424242/gui4j</url>
         <connection>scm:git:https://github.com/FunThomas424242/gui4j.git</connection>
         <developerConnection>scm:git:https://github.com/FunThomas424242/gui4j.git</developerConnection>
-        <tag>0.1.4-RELEASE</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <ciManagement>
