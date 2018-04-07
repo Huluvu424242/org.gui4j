@@ -1,3 +1,4 @@
+[![Download](https://api.bintray.com/packages/funthomas424242/funthomas424242-libs/org.gui4j/images/download.svg)](https://bintray.com/funthomas424242/funthomas424242-libs/org.gui4j/_latestVersion)
 [![Stories in Ready](https://badge.waffle.io/FunThomas424242/gui4j.svg?label=ready&title=Ready)](http://waffle.io/FunThomas424242/gui4j)
 [![Build Status](https://travis-ci.org/FunThomas424242/gui4j.svg?branch=master)](https://travis-ci.org/FunThomas424242/gui4j)
 
