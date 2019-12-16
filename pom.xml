@@ -22,7 +22,7 @@
     <groupId>com.github.funthomas424242</groupId>
     <artifactId>org.gui4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.5</version>
+    <version>0.1.6-SNAPSHOT</version>
     <name>gui4j</name>
     <inceptionYear>2002</inceptionYear>
 
