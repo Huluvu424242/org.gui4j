@@ -160,7 +160,6 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.7.201606060606</version>
                 <executions>
                     <execution>
                         <goals>
@@ -173,38 +172,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <tagNameFormat>@{project.version}-RELEASE</tagNameFormat>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <file>${project.build.directory}/${project.build.finalName}.jar</file>
-                    <repositoryId>bintray-funthomas424242-releases</repositoryId>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>funthomas424242-libs@bintray</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>
-                                deploy-file
-                            </goal>
-                        </goals>
-                        <configuration>
-                            <url>
-                                https://api.bintray.com/maven/funthomas424242/funthomas424242-libs/${project.artifactId}/;publish=0
-                            </url>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
