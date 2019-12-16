@@ -22,21 +22,19 @@
     <groupId>com.github.funthomas424242</groupId>
     <artifactId>org.gui4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
     <name>gui4j</name>
     <inceptionYear>2002</inceptionYear>
 
+    <prerequisites>
+        <maven>${mavenVersion}</maven>
+    </prerequisites>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <mavenVersion>3.3.9</mavenVersion>
-
-        <!-- Control of deployment and publishing to bintray -->
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${project.artifactId}</artifactId>
-        <version>${project.version}</version>
-        <updateReleaseInfo>true</updateReleaseInfo>
+        <mavenVersion>3.6.3</mavenVersion>
+        <maven.compiler.release>11</maven.compiler.release>
+        <java.version>13</java.version>
     </properties>
 
     <!-- details about the organization that 'owns' the project -->
@@ -62,7 +60,6 @@
         <url>https://github.com/FunThomas424242/gui4j</url>
         <connection>scm:git:https://github.com/FunThomas424242/gui4j.git</connection>
         <developerConnection>scm:git:https://github.com/FunThomas424242/gui4j.git</developerConnection>
-        <tag>0.1.4-RELEASE</tag>
     </scm>
 
     <ciManagement>
@@ -71,15 +68,10 @@
 
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>bintray-funthomas424242-snapshots</id>
-            <name>oss-jfrog-artifactory-snapshots</name>
-            <url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
-        </snapshotRepository>
         <repository>
-            <id>bintray-funthomas424242-releases</id>
-            <name>oss-jfrog-artifactory-releases</name>
-            <url>https://oss.jfrog.org/artifactory/oss-release-local</url>
+            <id>github</id>
+            <name>GitHub FunThomas424242 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/FunThomas424242/${project.artifactId}</url>
         </repository>
     </distributionManagement>
 
@@ -88,7 +80,7 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.0.2</version>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>dom4j</groupId>
@@ -108,11 +100,61 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <executions>
+                    <execution>
+                        <id>enforce-java</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${mavenVersion}</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <generateBackupPoms>false</generateBackupPoms>
+                    <rulesUri>file:///${project.basedir}/etc/version-rules.xml</rulesUri>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>show-dep-updates</id>
+                        <phase>
+                            validate
+                        </phase>
+                        <goals>
+                            <goal>display-dependency-updates</goal>
+                            <goal>display-plugin-updates</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <release>11</release>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                        <arg>--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
+                        <arg>--add-opens=java.base/java.net=ALL-UNNAMED</arg>
+                    </compilerArgs>
+                    <fork>true</fork>
                 </configuration>
             </plugin>
             <plugin>
@@ -167,54 +209,72 @@
                 </executions>
             </plugin>
         </plugins>
-
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
+                    <artifactId>maven-plugin-plugin</artifactId>
                     <version>3.6.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.8.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>2.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.7.7.201606060606</version>
+                    <version>0.8.5</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>3.0.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.4</version>
-                    <configuration>
-                        <failOnError>false</failOnError>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
-                </plugin>
-            </plugins>
 
+            </plugins>
         </pluginManagement>
     </build>
 
